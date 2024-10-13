@@ -14,7 +14,7 @@ def index_get():
 def predict():
     text=request.get_json().get("message")
     response=get_response(text)
-    print(f"Response: {response}")  # Debug: check what is being returned
+    print(f"Response: {response}")  
     message={"answer":response}
     return jsonify(message)
 

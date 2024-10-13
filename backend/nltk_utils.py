@@ -37,11 +37,6 @@ bog=bag_of_words(sentence,words)
 print(bog)
 
 
-# words=["Organize","organizes","organizing"]
-# stemmed_words=[stem(w) for w in words]
-# print(stemmed_words)
-
-
 
 
 

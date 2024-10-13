@@ -45,7 +45,7 @@ def get_response(msg):
             if tag == intent["tag"]:
                 return random.choice(intent['responses'])
     
-    return "I do not understand..."
+    return "That is a great question! Unfortunately, I do not have the answer right now, but let me know if you have any other questions."
 
 
 if __name__ == "__main__":

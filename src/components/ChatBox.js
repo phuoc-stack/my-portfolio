@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Chatbox = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const messageContainerRef = useRef(null);  // Reference for the message container
 
   const toggleChatbox = () => {
     setIsOpen(!isOpen);
@@ -39,6 +40,13 @@ const Chatbox = () => {
     setInputValue('');
   };
 
+  // Auto-scroll to the bottom when a new message is added
+  useEffect(() => {
+    if (messageContainerRef.current) {
+      messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+    }
+  }, [messages]);  // Run this effect whenever `messages` updates
+
   return (
     <div className={`chatbox ${isOpen ? 'chatbox--active' : ''}`}>
       <div className="chatbox__header" onClick={toggleChatbox}>
@@ -46,7 +54,7 @@ const Chatbox = () => {
       </div>
       {isOpen && (
         <div className="chatbox__content">
-          <div className="chatbox__messages">
+          <div className="chatbox__messages" ref={messageContainerRef} style={{ maxHeight: '300px', overflowY: 'auto' }}>
             {messages.map((msg, index) => (
               <div key={index} className={msg.name === 'Visitor' ? 'user-message' : 'bot-message'}>
                 <strong>{msg.name}:</strong> {msg.message}
